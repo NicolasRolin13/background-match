@@ -56,7 +56,6 @@ import {Component, Vue} from 'nuxt-property-decorator'
 import {mdiCounter, mdiHeart, mdiHome, mdiInformation, mdiShape, mdiAccountVoice, mdiPoliceBadge} from '@mdi/js'
 import {version} from '~/package.json'
 import WavyBackground from '~/assets/wavy-background.svg?inline'
-import LogoWithIcon from '~/assets/logo-with-icon.svg?inline'
 import NavigationMenu from '~/components/NavigationMenu.vue'
 
 @Component({
@@ -78,25 +77,20 @@ export default class Default extends Vue {
       title: false,
       items: [
         {
-          text: 'Home',
+          text: 'Le match',
           icon: mdiHome,
           to: '/'
         },
         {
-          text: 'Les catoch\'',
+          text: 'Les catégories',
           icon: mdiShape,
           to: '/categories'
         },
         {
-          text: 'Les punitions',
+          text: 'Les fautes',
           icon: mdiPoliceBadge,
           to: '/punishments'
         },
-        {
-          text: 'Virelangues',
-          icon: mdiAccountVoice,
-          to: '/tongue-twisters'
-        }
       ]
     },
     {

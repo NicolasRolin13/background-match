@@ -1,63 +1,114 @@
 <template>
   <div>
-    <v-row class="btn-time" no-gutters>
+    <v-row align="center">
       <v-col col="6">
-        <v-btn text @click="()=>addTime(30)">
-          +30s
-        </v-btn>
+          <div id="app">
+            <img :src="LogoImprodenfer" class="mx-auto" width="200" height="160"/>
+          </div>
+        <p style="font-size:5vw"> {{ score }}</p>
+        <div class="btn-wrapper">
+          <v-btn block class="btn btn-increment" @click="score++">
+            +1
+          </v-btn>
+          <v-btn block class="btn btn-decrement" @click="score--">
+            -1
+          </v-btn>
+        </div>
+        <p style="font-size:3vw">Fautes: {{ fautes }}</p>
+        <div class="btn-wrapper">
+          <v-btn block class="btn btn-increment" @click="fautes++">
+            +1
+          </v-btn>
+          <v-btn block class="btn btn-decrement" @click="fautes--">
+            -1
+          </v-btn>
+        </div>
+
       </v-col>
       <v-spacer />
-      <v-col col="6">
-        <v-btn text @click="()=>addTime(-30)">
-          -30s
-        </v-btn>
+
+    <v-col col="6">
+      <div class="countdown">
+        <div class="svg-circle-container">
+          <svg class="svg-circle" viewBox="0 0 100 100" :class="{isEnded, isPaused}">
+            <defs>
+              <linearGradient id="gradient" x2="0.35" y2="1">
+                <stop offset="0%" stop-color="var(--color-stop)" />
+                <stop offset="100%" stop-color="var(--color-bot)" />
+              </linearGradient>
+            </defs>
+            <g class="svg-circle-group">
+              <circle class="svg-circle-total" cx="50" cy="50" r="45" />
+              <path
+                :stroke-dasharray="strokeDashArray"
+                class="svg-circle-remaining"
+                d="
+              M 50, 50
+              m -45, 0
+              a 45,45 0 1,0 90,0
+              a 45,45 0 1,0 -90,0
+            "
+              />
+            </g>
+          </svg>
+        </div>
+
+        <div class="countdown-text">
+          <div class="countdown-text-upper">
+            <v-btn text @click="stop">
+              Réinitialiser
+            </v-btn>
+          </div>
+          <div
+            class="countdown-text-middle"
+            @click.stop="dialog = isStopped"
+          >
+            {{ formattedTimer }}
+          </div>
+          <div class="countdown-text-bottom">
+            <v-btn depressed @click="() => isPaused ? start() : pause()">
+              <v-icon>{{ isPaused ? icons.mdiPlay : icons.mdiPause }}</v-icon>
+            </v-btn>
+          </div>
+        </div>
+      </div>
       </v-col>
+
+    <v-spacer />
+
+    <v-col col="6">
+        <div id="app1">
+          <img :src="LogoAutreEquipe" class="mx-auto" width="200" height="160"/>
+        </div>
+        <p style="font-size:5vw"> {{ score_adversaire }}</p>
+        <div class="btn-wrapper">
+          <v-btn block class="btn btn-increment" @click="score_adversaire++">
+            +1
+          </v-btn>
+          <v-btn block class="btn btn-decrement" @click="score_adversaire--">
+            -1
+          </v-btn>
+        </div>
+        <p style="font-size:3vw">Fautes: {{ fautes_adversaire }}</p>
+        <div class="btn-wrapper">
+          <v-btn block class="btn btn-increment" @click="fautes_adversaire++">
+            +1
+          </v-btn>
+          <v-btn block class="btn btn-decrement" @click="fautes_adversaire--">
+            -1
+          </v-btn>
+        </div>
+
+    </v-col>
+
     </v-row>
 
-    <div class="countdown">
-      <div class="svg-circle-container">
-        <svg class="svg-circle" viewBox="0 0 100 100" :class="{isEnded, isPaused}">
-          <defs>
-            <linearGradient id="gradient" x2="0.35" y2="1">
-              <stop offset="0%" stop-color="var(--color-stop)" />
-              <stop offset="100%" stop-color="var(--color-bot)" />
-            </linearGradient>
-          </defs>
-          <g class="svg-circle-group">
-            <circle class="svg-circle-total" cx="50" cy="50" r="45" />
-            <path
-              :stroke-dasharray="strokeDashArray"
-              class="svg-circle-remaining"
-              d="
-            M 50, 50
-            m -45, 0
-            a 45,45 0 1,0 90,0
-            a 45,45 0 1,0 -90,0
-          "
-            />
-          </g>
-        </svg>
-      </div>
+    <p>Catégorie: </p>
+    <input v-model="categorie" placeholder="" />
 
-      <div class="countdown-text">
-        <div class="countdown-text-upper">
-          <v-btn text @click="stop">
-            Réinitialiser
-          </v-btn>
-        </div>
-        <div
-          class="countdown-text-middle"
-          @click.stop="dialog = isStopped"
-        >
-          {{ formattedTimer }}
-        </div>
-        <div class="countdown-text-bottom">
-          <v-btn depressed @click="() => isPaused ? start() : pause()">
-            <v-icon>{{ isPaused ? icons.mdiPlay : icons.mdiPause }}</v-icon>
-          </v-btn>
-        </div>
-      </div>
-    </div>
+    <p>Thème: </p>
+    <input v-model="theme" placeholder="" />
+
 
     <v-dialog
       v-model="dialog"
@@ -86,6 +137,9 @@ import {Component, Vue} from 'nuxt-property-decorator'
 import {mdiPlay, mdiPause} from '@mdi/js'
 import TimeEditor from './TimeEditor.vue'
 import {screenWake} from '~/service/screen-wake'
+import LogoImprodenfer from '~/assets/image_impro_denfer.jpg'
+import LogoAutreEquipe from '~/assets/image_cible.png'
+
 
 const mod = (n: number, m: number) => ((n % m) + m) % m
 
@@ -102,6 +156,16 @@ export default class Countdown extends Vue {
   icons = {
     mdiPlay,
     mdiPause
+  }
+  score = 0
+  fautes = 0
+  score_adversaire = 0
+  fautes_adversaire = 0
+  data () {
+    return {
+      LogoImprodenfer: LogoImprodenfer,
+      LogoAutreEquipe: LogoAutreEquipe
+    }
   }
 
   get remainingSecs() {

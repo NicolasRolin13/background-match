@@ -9,18 +9,16 @@
         </v-btn>
         <v-spacer />
         <h1 class="text-center">
-          Cauctus
+          Match Impro d'enfer - Cible
         </h1>
       </v-row>
 
-      <Generators />
     </div>
     <div class="panel panel-countdown-wrapper">
       <div class="panel panel-countdown ">
         <div class="anchor text-center" @click="collapsed=!collapsed">
           <v-icon>{{ collapsed ? icons.mdiChevronUp : icons.mdiChevronDown }}</v-icon>
         </div>
-
         <Countdown ref="countdown" />
       </div>
       <div class="panel panel-blank" />
@@ -32,11 +30,10 @@
 import {Component, Ref, Vue} from 'nuxt-property-decorator'
 import {mdiChevronDown, mdiChevronUp, mdiMenu} from '@mdi/js'
 import Countdown from '~/components/Countdown.vue'
-import Generators from '~/components/Generators.vue'
 import {description} from '~/package.json'
 
 @Component({
-  components: {Countdown, Generators}
+  components: {Countdown, }
 })
 export default class Index extends Vue {
   @Ref() readonly countdown!: Countdown;
@@ -93,17 +90,10 @@ export default class Index extends Vue {
     text-align: center;
     --border-radius: 30px;
 
-    &.panel-theme {
-      background: #51a2b6;
-      background: linear-gradient(114deg, #73d3a7 0%, #51a2b6 100%);
-      padding: 20px 30px calc(20px + var(--border-radius)) 30px;
-      height: 100vh;
-    }
-
     &.panel-countdown-wrapper {
       position: absolute;
       transition: top 300ms ease-in-out;
-      top: 277px;
+      top: 50px;
 
       .collapsed& {
         top: 100vh;
