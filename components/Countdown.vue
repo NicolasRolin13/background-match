@@ -102,13 +102,13 @@
     </v-col>
 
     </v-row>
+    <p style="font-size:5vw">Catégorie: </p>
+    <input v-model="categorie" placeholder="" style="font-size:5vw" />
 
-    <p>Catégorie: </p>
-    <input v-model="categorie" placeholder="" />
+    <p style="font-size:5vw">Thème: </p>
+    <input v-model="theme" placeholder=""  style="font-size:5vw" />
 
-    <p>Thème: </p>
-    <input v-model="theme" placeholder="" />
-
+    <input v-model="divers" placeholder=""  style="font-size:5vw" />
 
     <v-dialog
       v-model="dialog"
@@ -161,6 +161,7 @@ export default class Countdown extends Vue {
   fautes = 0
   score_adversaire = 0
   fautes_adversaire = 0
+
   data () {
     return {
       LogoImprodenfer: LogoImprodenfer,
