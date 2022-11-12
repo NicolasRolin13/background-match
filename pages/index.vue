@@ -53,7 +53,7 @@ export default class Index extends Vue {
   head() {
     return {
       titleTemplate: '%s',
-      title: `Cauctus - ${description}`,
+      title: `Impro d'enfer - ${description}`,
       link: [
         {
           rel: 'canonical',

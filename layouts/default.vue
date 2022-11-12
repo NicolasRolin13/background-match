@@ -61,7 +61,6 @@ import NavigationMenu from '~/components/NavigationMenu.vue'
 @Component({
   components: {
     WavyBackground,
-    LogoWithIcon,
     NavigationMenu
   }
 })

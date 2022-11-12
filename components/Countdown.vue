@@ -5,23 +5,27 @@
           <div id="app">
             <img :src="LogoImprodenfer" class="mx-auto" width="200" height="160"/>
           </div>
-        <p style="font-size:5vw"> {{ score }}</p>
+        <p style="font-size:4vw">Score : {{ score }}</p>
         <div class="btn-wrapper">
-          <v-btn block class="btn btn-increment" @click="score++">
-            +1
-          </v-btn>
-          <v-btn block class="btn btn-decrement" @click="score--">
-            -1
-          </v-btn>
+          <v-row align="center">
+            <v-col col="3">
+              <v-btn block class="btn btn-increment" @click="score++">+1</v-btn>
+            </v-col>
+            <v-col col="3">
+              <v-btn block class="btn btn-decrement" @click="score--">-1</v-btn>
+            </v-col>
+          </v-row>
         </div>
-        <p style="font-size:3vw">Fautes: {{ fautes }}</p>
+        <p style="font-size:2vw">Fautes: {{ fautes }}</p>
         <div class="btn-wrapper">
-          <v-btn block class="btn btn-increment" @click="fautes++">
-            +1
-          </v-btn>
-          <v-btn block class="btn btn-decrement" @click="fautes--">
-            -1
-          </v-btn>
+          <v-row align="center">
+            <v-col col="3">
+          <v-btn block class="btn btn-increment" @click="fautes++">+1</v-btn>
+            </v-col>
+            <v-col col="3">
+          <v-btn block class="btn btn-decrement" @click="fautes--">-1</v-btn>
+            </v-col>
+          </v-row>
         </div>
 
       </v-col>
@@ -80,35 +84,46 @@
         <div id="app1">
           <img :src="LogoAutreEquipe" class="mx-auto" width="200" height="160"/>
         </div>
-        <p style="font-size:5vw"> {{ score_adversaire }}</p>
+        <p style="font-size:4vw">Score :  {{ score_adversaire }}</p>
         <div class="btn-wrapper">
-          <v-btn block class="btn btn-increment" @click="score_adversaire++">
-            +1
-          </v-btn>
-          <v-btn block class="btn btn-decrement" @click="score_adversaire--">
-            -1
-          </v-btn>
+          <v-row align="center">
+            <v-col col="3">
+              <v-btn block class="btn btn-increment" @click="score_adversaire++">+1</v-btn>
+            </v-col>
+            <v-col col="3">
+              <v-btn block class="btn btn-decrement" @click="score_adversaire--">-1</v-btn>
+            </v-col>
+          </v-row>
+
         </div>
-        <p style="font-size:3vw">Fautes: {{ fautes_adversaire }}</p>
+        <p style="font-size:2vw">Fautes: {{ fautes_adversaire }}</p>
         <div class="btn-wrapper">
-          <v-btn block class="btn btn-increment" @click="fautes_adversaire++">
-            +1
-          </v-btn>
-          <v-btn block class="btn btn-decrement" @click="fautes_adversaire--">
-            -1
-          </v-btn>
+          <v-row align="center">
+            <v-col col="3">
+              <v-btn block class="btn btn-increment" @click="fautes_adversaire++">+1</v-btn>
+            </v-col>
+            <v-col col="3">
+              <v-btn block class="btn btn-decrement" @click="fautes_adversaire--">-1</v-btn>
+            </v-col>
+          </v-row>
         </div>
 
     </v-col>
 
     </v-row>
-    <p style="font-size:5vw">Catégorie: </p>
-    <input v-model="categorie" placeholder="" style="font-size:5vw" />
+    <p style="font-size:3vw" text-align="center">Catégorie : </p>
+    <input v-model="categorie" placeholder="" style="font-size:4vw" size="32" text-align="center"/>
 
-    <p style="font-size:5vw">Thème: </p>
-    <input v-model="theme" placeholder=""  style="font-size:5vw" />
-
-    <input v-model="divers" placeholder=""  style="font-size:5vw" />
+    <p style="font-size:3vw" text-align="center">Thème : </p>
+    <div>
+    <input v-model="theme" placeholder="" style="font-size:4vw" size="32" text-align="center"/>
+    </div>
+    <div>
+    <input v-model="theme_2" placeholder="" style="font-size:4vw" size="32" text-align="center"/>
+    </div>
+    <div>
+    <input v-model="theme_3" placeholder="" style="font-size:4vw" size="32" text-align="center"/>
+    </div>
 
     <v-dialog
       v-model="dialog"
@@ -137,7 +152,7 @@ import {Component, Vue} from 'nuxt-property-decorator'
 import {mdiPlay, mdiPause} from '@mdi/js'
 import TimeEditor from './TimeEditor.vue'
 import {screenWake} from '~/service/screen-wake'
-import LogoImprodenfer from '~/assets/image_impro_denfer.jpg'
+import LogoImprodenfer from '~/assets/logo noir.png'
 import LogoAutreEquipe from '~/assets/image_cible.png'
 
 
